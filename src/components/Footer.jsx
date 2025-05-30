@@ -1,65 +1,64 @@
-import { FaLinkedin, FaGithub, FaWhatsapp } from 'react-icons/fa';
+
+import { Mail, MapPin, Phone, Facebook, Twitter, Linkedin } from 'lucide-react';
 
 const Footer = () => {
   return (
-    <footer
-      className="py-8"
-      style={{
-        backgroundColor: '#111111',
-        color: 'white',
-      }}
-    >
-      <div className="max-w-7xl mx-auto text-center">
-        {/* Enlaces de redes sociales */}
-        <div className="flex justify-center space-x-6 mb-4">
-          <a
-            href="https://www.linkedin.com/in/israel-samuels-g-201419197/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-3 rounded-full bg-white hover:bg-gray-100 transition duration-300 shadow hover:shadow-[0_0_15px_#2CFF05]"
-          >
-            <FaLinkedin size={20} color="#0A66C2" />
-          </a>
-          <a
-            href="https://github.com/Gill3010"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-3 rounded-full bg-white hover:bg-gray-100 transition duration-300 shadow hover:shadow-[0_0_15px_#2CFF05]"
-          >
-            <FaGithub size={20} color="#171515" />
-          </a>
-          <a
-            href="https://wa.me/50765498362"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-3 rounded-full bg-white hover:bg-gray-100 transition duration-300 shadow hover:shadow-[0_0_15px_#2CFF05]"
-          >
-            <FaWhatsapp size={20} color="#25D366" />
-          </a>
+    <footer className="relative bg-gray-900/95 backdrop-blur-md border-t border-white/10 text-white">
+      {/* Geometric decorative elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-4 left-10 w-6 h-6 border border-purple-400/20 transform rotate-45" />
+        <div className="absolute bottom-6 right-16 w-4 h-4 border border-blue-400/20 rounded-full" />
+        <div className="absolute top-10 right-10 w-3 h-3 bg-gradient-to-r from-purple-400/20 to-blue-400/20 rotate-12" />
+      </div>
+
+      <div className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-3 gap-10 relative z-10">
+        {/* About */}
+        <div>
+          <h2 className="text-xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-4">
+            RelaticProtect
+          </h2>
+          <p className="text-gray-300 text-sm">
+            Protegemos tu creatividad. Especialistas en propiedad intelectual: marcas, patentes y derechos de autor.
+          </p>
         </div>
 
-        {/* Descripción o slogan */}
-        <p className="text-sm mb-4" style={{ color: '#fff' }}>
-          Soy un desarrollador apasionado por crear soluciones innovadoras.
-        </p>
-
-        {/* Separador */}
-        <hr className="border-t border-[#2CFF05] mb-4" />
-
-        {/* Derechos reservados */}
-        <p className="text-sm" style={{ color: '#ffff' }}>
-          <span style={{ color: '#2CFF05' }}>©2025 Innova Proyectos</span>. Todos los derechos reservados.
-        </p>
-
-        {/* Enlace a la página de contacto */}
-        <div className="mt-4">
-          <a
-            href="https://wa.me/50765498362"
-            className="text-[#2cff05] hover:text-white transition duration-300"
-          >
-            Contáctame
-          </a>
+        {/* Contact Info */}
+        <div className="space-y-4">
+          <h3 className="text-sm font-semibold text-purple-300 uppercase tracking-wide">Contacto</h3>
+          <div className="flex items-center space-x-3 text-sm text-gray-300">
+            <MapPin className="w-4 h-4 text-purple-300" />
+            <span>Panamá, Ciudad de Panamá</span>
+          </div>
+          <div className="flex items-center space-x-3 text-sm text-gray-300">
+            <Phone className="w-4 h-4 text-purple-300" />
+            <span>+507 6645-7685 | +507 208-4689</span>
+          </div>
+          <div className="flex items-center space-x-3 text-sm text-gray-300">
+            <Mail className="w-4 h-4 text-purple-300" />
+            <span>administracion@relaticpanama.org</span>
+          </div>
         </div>
+
+        {/* Social Links */}
+        <div className="space-y-4">
+          <h3 className="text-sm font-semibold text-purple-300 uppercase tracking-wide">Síguenos</h3>
+          <div className="flex space-x-4">
+            <a href="#" className="w-10 h-10 flex items-center justify-center rounded-lg bg-gradient-to-br from-purple-600/20 to-blue-600/20 hover:scale-110 transition-all duration-300">
+              <Facebook className="w-5 h-5 text-purple-300" />
+            </a>
+            <a href="#" className="w-10 h-10 flex items-center justify-center rounded-lg bg-gradient-to-br from-purple-600/20 to-blue-600/20 hover:scale-110 transition-all duration-300">
+              <Twitter className="w-5 h-5 text-purple-300" />
+            </a>
+            <a href="#" className="w-10 h-10 flex items-center justify-center rounded-lg bg-gradient-to-br from-purple-600/20 to-blue-600/20 hover:scale-110 transition-all duration-300">
+              <Linkedin className="w-5 h-5 text-purple-300" />
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom bar */}
+      <div className="border-t border-white/10 py-4 text-center text-xs text-gray-400 relative z-10">
+        © {new Date().getFullYear()} RelaticProtect. Todos los derechos reservados.
       </div>
     </footer>
   );

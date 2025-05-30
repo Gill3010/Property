@@ -1,111 +1,224 @@
-import { useState } from 'react';
-import { FaLinkedin, FaGithub, FaWhatsapp } from 'react-icons/fa';
-import logo from '../assets/logotipo.png';
+import React, { useState, useEffect } from 'react';
+import { Menu, X, Shield, Scale, FileText, Users, Phone, ChevronDown } from 'lucide-react';
 
-const Navbar = () => {
+const IPNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState(null);
 
-  const toggleMenu = () => {
+  // Detect scroll to change navbar style
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const toggleMobile = () => {
     setIsOpen(!isOpen);
   };
 
-  const linkedinColor = '#0077B5';
-  const githubColor = '#181717';
-  const whatsappColor = '#25D366';
+  const handleDropdown = (dropdown) => {
+    setActiveDropdown(activeDropdown === dropdown ? null : dropdown);
+  };
+
+  const services = [
+    { name: 'Registro de Marcas', href: '#marcas', icon: Shield },
+    { name: 'Derechos de Autor', href: '#derechos', icon: FileText },
+    { name: 'Patentes', href: '#patentes', icon: Scale },
+    { name: 'Consultoría IP', href: '#consultoria', icon: Users }
+  ];
 
   return (
-    <nav className="bg-[#111111] text-[#2CFF05] hover:text-[#ffff] py-4 shadow-md sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 flex items-center justify-between">
-
-        {/* Logo */}
-        <a href="https://www.innovaproyectos.org" className="flex items-center space-x-2">
-          <img src={logo} alt="Logo" className="w-12 h-12" />
-          <span className="text-2xl font-bold">Innova Proyectos</span>
-        </a>
-
-        {/* Menú Desktop */}
-        <div className="hidden md:flex space-x-8 text-lg">
-          <a href="#inicio" className="hover:text-[#FFFF] transition-colors duration-300">Inicio</a>
-          <a href="#nosotros" className="hover:text-[#FFFF] transition-colors duration-300">Sobre mí</a>
-          <a href="#servicios" className="hover:text-[#FFFF] transition-colors duration-300">Servicios</a>
-          <a href="#contacto" className="hover:text-[#FFFF] transition-colors duration-300">Contacto</a>
-        </div>
-
-        {/* Botón menú móvil */}
-        <div className="md:hidden">
-          <button onClick={toggleMenu} className="p-2 focus:outline-none text-2xl">&#9776;</button>
-        </div>
-
-        {/* Iconos redes sociales - Desktop */}
-        <div className="hidden md:flex space-x-4">
-          <a
-            href="https://www.linkedin.com/in/israel-samuels-g-201419197/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-3 rounded-full bg-white hover:bg-gray-100 transition duration-300 shadow hover:shadow-[0_0_15px_#2CFF05]"
-          >
-            <FaLinkedin size={24} color={linkedinColor} />
-          </a>
-          <a
-            href="https://github.com/Gill3010"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-3 rounded-full bg-white hover:bg-gray-100 transition duration-300 shadow hover:shadow-[0_0_15px_#2CFF05]"
-          >
-            <FaGithub size={24} color={githubColor} />
-          </a>
-          <a
-            href="https://wa.me/50765498362"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-3 rounded-full bg-white hover:bg-gray-100 transition duration-300 shadow hover:shadow-[0_0_15px_#2CFF05]"
-          >
-            <FaWhatsapp size={24} color={whatsappColor} />
-          </a>
-        </div>
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      isScrolled 
+        ? 'bg-gray-900/95 backdrop-blur-md border-b border-white/10 shadow-2xl' 
+        : 'bg-transparent'
+    }`}>
+      {/* Geometric decorative elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-2 left-10 w-8 h-8 border border-purple-400/20 transform rotate-45" />
+        <div className="absolute top-4 right-20 w-6 h-6 border border-blue-400/20 rounded-full" />
+        <div className="absolute bottom-2 right-10 w-4 h-4 bg-gradient-to-r from-purple-400/20 to-blue-400/20 transform rotate-12" />
       </div>
 
-      {/* Menú móvil desplegable */}
-      {isOpen && (
-        <div className="md:hidden bg-[#111111] text-[#2CFF05] mt-4">
-          <div className="flex flex-col items-center space-y-4 py-4">
-            <a href="#inicio" className="hover:text-[#FFFF] transition-colors duration-300" onClick={toggleMenu}>Inicio</a>
-            <a href="#nosotros" className="hover:text-[#FFF] transition-colors duration-300" onClick={toggleMenu}>Sobre mí</a>
-            <a href="#servicios" className="hover:text-[#FFFF] transition-colors duration-300" onClick={toggleMenu}>Servicios</a>
-            <a href="#contacto" className="hover:text-[#FFFF] transition-colors duration-300" onClick={toggleMenu}>Contacto</a>
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
+          {/* Logo */}
+          <div className="flex items-center space-x-3">
+            <div className="relative">
+              <div className="w-10 h-10 bg-gradient-to-br from-blue-500 via-purple-600 to-indigo-700 rounded-lg flex items-center justify-center shadow-lg">
+                <Shield className="w-6 h-6 text-white" />
+              </div>
+              <div className="absolute -top-1 -right-1 w-3 h-3 bg-gradient-to-r from-orange-400 to-pink-500 rounded-full animate-pulse" />
+            </div>
+            <div className="text-white">
+              <h1 className="text-xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+                RelaticProtect
+              </h1>
+              <span className="text-xs text-gray-300 tracking-wider">PROPIEDAD INTELECTUAL</span>
+            </div>
+          </div>
 
-            {/* Iconos redes sociales - Móvil */}
-            <div className="flex space-x-4 pt-4">
-              <a
-                href="https://www.linkedin.com/in/israel-samuels-g-201419197/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-3 rounded-full bg-white hover:bg-gray-100 transition duration-300 shadow hover:shadow-[0_0_15px_#2CFF05]"
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center space-x-8">
+            <a 
+              href="#inicio" 
+              className="text-white hover:text-purple-300 transition-colors duration-300 font-medium relative group"
+            >
+              Inicio
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-400 to-blue-400 transition-all duration-300 group-hover:w-full" />
+            </a>
+
+            {/* Services Dropdown */}
+            <div className="relative">
+              <button
+                onClick={() => handleDropdown('services')}
+                className="flex items-center space-x-1 text-white hover:text-purple-300 transition-colors duration-300 font-medium relative group"
               >
-                <FaLinkedin size={24} color={linkedinColor} />
-              </a>
-              <a
-                href="https://github.com/Gill3010"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-3 rounded-full bg-white hover:bg-gray-100 transition duration-300 shadow hover:shadow-[0_0_15px_#2CFF05]"
+                <span>Servicios</span>
+                <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${
+                  activeDropdown === 'services' ? 'rotate-180' : ''
+                }`} />
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-400 to-blue-400 transition-all duration-300 group-hover:w-full" />
+              </button>
+
+              {/* Dropdown Menu */}
+              {activeDropdown === 'services' && (
+                <div className="absolute top-full left-0 mt-2 w-64 bg-gray-800/95 backdrop-blur-md rounded-xl border border-white/10 shadow-2xl overflow-hidden">
+                  <div className="p-2">
+                    {services.map((service, index) => {
+                      const IconComponent = service.icon;
+                      return (
+                        <a
+                          key={service.name}
+                          href={service.href}
+                          className="flex items-center space-x-3 p-3 rounded-lg hover:bg-gradient-to-r hover:from-purple-600/20 hover:to-blue-600/20 transition-all duration-300 group"
+                        >
+                          <div className="w-8 h-8 bg-gradient-to-br from-purple-500/20 to-blue-500/20 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                            <IconComponent className="w-4 h-4 text-purple-300" />
+                          </div>
+                          <span className="text-white group-hover:text-purple-300 transition-colors duration-300 font-medium">
+                            {service.name}
+                          </span>
+                        </a>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <a 
+              href="#sobre-nosotros" 
+              className="text-white hover:text-purple-300 transition-colors duration-300 font-medium relative group"
+            >
+              Nosotros
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-400 to-blue-400 transition-all duration-300 group-hover:w-full" />
+            </a>
+
+            <a 
+              href="#blog" 
+              className="text-white hover:text-purple-300 transition-colors duration-300 font-medium relative group"
+            >
+              Blog
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-400 to-blue-400 transition-all duration-300 group-hover:w-full" />
+            </a>
+
+            {/* CTA Button */}
+            <a
+              href="#contacto"
+              className="relative px-6 py-2 bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-700 text-white rounded-full font-semibold hover:from-purple-500 hover:via-blue-500 hover:to-indigo-600 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-purple-500/25"
+            >
+              <span className="relative z-10 flex items-center space-x-2">
+                <Phone className="w-4 h-4" />
+                <span>Contactar</span>
+              </span>
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-400 to-blue-400 rounded-full opacity-0 hover:opacity-20 transition-opacity duration-300" />
+            </a>
+          </div>
+
+          {/* Mobile menu button */}
+          <div className="md:hidden">
+            <button
+              onClick={toggleMobile}
+              className="text-white hover:text-purple-300 transition-colors duration-300 p-2"
+            >
+              {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile Navigation */}
+        <div className={`md:hidden transition-all duration-500 ease-in-out ${
+          isOpen 
+            ? 'max-h-screen opacity-100 pb-6' 
+            : 'max-h-0 opacity-0 overflow-hidden'
+        }`}>
+          <div className="bg-gray-800/95 backdrop-blur-md rounded-xl border border-white/10 mt-4 overflow-hidden">
+            <div className="p-4 space-y-2">
+              <a 
+                href="#inicio" 
+                className="block px-4 py-3 text-white hover:text-purple-300 hover:bg-gradient-to-r hover:from-purple-600/20 hover:to-blue-600/20 rounded-lg transition-all duration-300 font-medium"
+                onClick={() => setIsOpen(false)}
               >
-                <FaGithub size={24} color={githubColor} />
+                Inicio
               </a>
-              <a
-                href="https://wa.me/50765498362"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-3 rounded-full bg-white hover:bg-gray-100 transition duration-300 shadow hover:shadow-[0_0_15px_#2CFF05]"
+
+              {/* Mobile Services */}
+              <div className="space-y-2">
+                <div className="px-4 py-2 text-purple-300 font-semibold text-sm tracking-wider uppercase">
+                  Servicios
+                </div>
+                {services.map((service) => {
+                  const IconComponent = service.icon;
+                  return (
+                    <a
+                      key={service.name}
+                      href={service.href}
+                      className="flex items-center space-x-3 px-4 py-3 text-white hover:text-purple-300 hover:bg-gradient-to-r hover:from-purple-600/20 hover:to-blue-600/20 rounded-lg transition-all duration-300"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      <IconComponent className="w-4 h-4 text-purple-300" />
+                      <span>{service.name}</span>
+                    </a>
+                  );
+                })}
+              </div>
+
+              <a 
+                href="#sobre-nosotros" 
+                className="block px-4 py-3 text-white hover:text-purple-300 hover:bg-gradient-to-r hover:from-purple-600/20 hover:to-blue-600/20 rounded-lg transition-all duration-300 font-medium"
+                onClick={() => setIsOpen(false)}
               >
-                <FaWhatsapp size={24} color={whatsappColor} />
+                Nosotros
               </a>
+
+              <a 
+                href="#blog" 
+                className="block px-4 py-3 text-white hover:text-purple-300 hover:bg-gradient-to-r hover:from-purple-600/20 hover:to-blue-600/20 rounded-lg transition-all duration-300 font-medium"
+                onClick={() => setIsOpen(false)}
+              >
+                Blog
+              </a>
+
+              <div className="pt-4 border-t border-white/10">
+                <a
+                  href="#contacto"
+                  className="flex items-center justify-center space-x-2 w-full px-6 py-3 bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-700 text-white rounded-lg font-semibold hover:from-purple-500 hover:via-blue-500 hover:to-indigo-600 transition-all duration-300 transform hover:scale-105"
+                  onClick={() => setIsOpen(false)}
+                >
+                  <Phone className="w-4 h-4" />
+                  <span>Contactar</span>
+                </a>
+              </div>
             </div>
           </div>
         </div>
-      )}
+      </div>
     </nav>
   );
 };
 
-export default Navbar;
+export default IPNavbar;
