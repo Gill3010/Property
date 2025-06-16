@@ -64,7 +64,7 @@ const IPNavbar = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             <a 
-              href="#inicio" 
+              href="/_protect" 
               className="text-white hover:text-purple-300 transition-colors duration-300 font-medium relative group"
             >
               Inicio
@@ -111,7 +111,7 @@ const IPNavbar = () => {
             </div>
 
             <a 
-              href="#sobre-nosotros" 
+              href="/_protect/aboutus" 
               className="text-white hover:text-purple-300 transition-colors duration-300 font-medium relative group"
             >
               Nosotros
@@ -119,7 +119,7 @@ const IPNavbar = () => {
             </a>
 
             <a 
-              href="#blog" 
+              href="https://relaticpanama.org/_blog/" 
               className="text-white hover:text-purple-300 transition-colors duration-300 font-medium relative group"
             >
               Blog
@@ -159,7 +159,7 @@ const IPNavbar = () => {
           <div className="bg-gray-800/95 backdrop-blur-md rounded-xl border border-white/10 mt-4 overflow-hidden">
             <div className="p-4 space-y-2">
               <a 
-                href="#inicio" 
+                href="/_protect" 
                 className="block px-4 py-3 text-white hover:text-purple-300 hover:bg-gradient-to-r hover:from-purple-600/20 hover:to-blue-600/20 rounded-lg transition-all duration-300 font-medium"
                 onClick={() => setIsOpen(false)}
               >
@@ -188,7 +188,7 @@ const IPNavbar = () => {
               </div>
 
               <a 
-                href="#sobre-nosotros" 
+                href="/_protect/aboutus" 
                 className="block px-4 py-3 text-white hover:text-purple-300 hover:bg-gradient-to-r hover:from-purple-600/20 hover:to-blue-600/20 rounded-lg transition-all duration-300 font-medium"
                 onClick={() => setIsOpen(false)}
               >
@@ -196,7 +196,7 @@ const IPNavbar = () => {
               </a>
 
               <a 
-                href="#blog" 
+                href="https://relaticpanama.org/_blog/" 
                 className="block px-4 py-3 text-white hover:text-purple-300 hover:bg-gradient-to-r hover:from-purple-600/20 hover:to-blue-600/20 rounded-lg transition-all duration-300 font-medium"
                 onClick={() => setIsOpen(false)}
               >
